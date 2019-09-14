@@ -10,9 +10,8 @@ do {
   console.log(total);
 } while (input !== null);
 
-if (input === null) {
-  message = `Number is ${total}`;
-}
+message = `Number is ${total}`;
+
 alert(message);
 
 // let input;
