@@ -6,21 +6,11 @@ let messageUnique;
 let messageOfAddition;
 
 const isLoginValid = function(login) {
-  if (login.length > 3 && login.length < 17) {
-    messageValid = true;
-  } else {
-    messageValid = false;
-  }
-  return messageValid;
+  return login.length > 3 && login.length < 17 ? true : false;
 };
 
 const isLoginUnique = function(allLogins, login) {
-  if (allLogins.includes(login)) {
-    messageUnique = false;
-  } else {
-    messageUnique = true;
-  }
-  return messageUnique;
+  return allLogins.includes(login) ? false : true;
 };
 
 const addLogin = function(allLogins, login) {
