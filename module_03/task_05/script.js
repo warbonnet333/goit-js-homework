@@ -5,7 +5,6 @@ function getAllPropValues(array, prop) {
 
   for (let arr of array) {
     if (prop in arr) {
-      console.log(arr[prop])
       nededProps.push(arr[prop]);
     }
   }
