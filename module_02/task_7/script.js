@@ -6,7 +6,7 @@ let messageUnique;
 let messageOfAddition;
 
 const isLoginValid = function(login) {
-  return login.length >= 4 && login.length <= 16 ? true : false;
+  return login.length >= 4 && login.length <= 16;
 };
 
 const isLoginUnique = function(allLogins, login) {

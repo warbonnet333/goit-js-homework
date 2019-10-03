@@ -3,12 +3,7 @@
 function checkForSpam(str) {
   let answer;
   str = str.toLowerCase();
-  if (str.includes("sale") || str.includes("spam")) {
-    answer = true;
-  } else {
-    answer = false;
-  }
-  return answer;
+  return str.includes("sale") || str.includes("spam");
 }
 
 console.log(checkForSpam("Latest technology news")); // false
