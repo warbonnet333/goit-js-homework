@@ -20,7 +20,16 @@ invokeInventoryAction("Аптечка", inventory.add.bind(inventory));
 
 console.log(inventory.items); // ['Монорельса', 'Фильтр', 'Аптечка']
 
-invokeInventoryAction("Фильтр", inventory.remove.bind(inventory));
-// Invoking remove opeartion on Фильтр
+// invokeInventoryAction("Фильтр", inventory.remove.bind(inventory));
+// // Invoking remove opeartion on Фильтр
 
+
+//-----------------------------
+
+const invokeInventoryOperation = function(itemName, inventoryAction) {
+  console.log(`Invoking ${inventoryAction.name} opeartion on ${itemName}`);
+  inventoryAction.call(this, itemName);
+};
+
+invokeInventoryOperation.call(inventory, "Фильтр", inventory.remove);
 console.log(inventory.items); // ['Монорельса', 'Аптечка']
