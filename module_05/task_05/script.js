@@ -6,15 +6,7 @@ class Car {
       `maxSpeed: ${this.maxSpeed}, speed: ${this.speed}, isOn: ${this.isOn}, distance: ${this.distance}, price: ${this._price}`
     );
   }
-  /*
-   *
-   * Добавь свойства будущеего экземпляра класса:
-   *  speed - текущая скорость, изначально 0
-   *  price - цена автомобиля
-   *  maxSpeed - максимальная скорость
-   *  isOn - заведен ли автомобиль, значения true или false. Изначально false
-   *  distance - общий киллометраж, изначально 0
-   */
+
   constructor({ speed = 0, price, maxSpeed, isOn, distance = 0 }) {
     this.speed = speed;
     this._price = price;
@@ -31,10 +23,6 @@ class Car {
     this._price = newPrice;
   }
 
-  /*
-   * Добавь код для того чтобы завести автомобиль
-   * Записывает в свойство isOn значение true
-   */
   turnOn() {
     this.isOn = true;
   }
@@ -62,10 +50,6 @@ class Car {
     }
   }
 
-  /*
-   * Добавляет в поле distance киллометраж (hours * speed),
-   * но только в том случае если машина заведена!
-   */
   drive(hours) {
     if (this.isOn) {
       this.distance = this.speed * hours;
