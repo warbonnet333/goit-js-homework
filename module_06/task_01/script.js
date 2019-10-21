@@ -190,12 +190,13 @@ console.log(" ---------10---------");
 const getSortedUniqueSkills = users => {
   const allNeededSkills = users.reduce((allSkills, user) => {
     allSkills.push(...user.skills);
-    return allSkills.reduce((allFilteredSkills, skill) => {
+    allSkills.reduce((allFilteredSkills, skill) => {
       if (!allFilteredSkills.includes(skill)) {
         allFilteredSkills.push(skill);
       }
-      return allSkills;
+      return allFilteredSkills;
     }, []);
+    return allSkills;
   }, []);
 
   return allNeededSkills.sort();
