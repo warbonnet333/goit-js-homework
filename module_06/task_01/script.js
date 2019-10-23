@@ -90,19 +90,6 @@ const users = [
 //---------1---------
 console.log(" ---------1---------");
 
-const obj = { two: 2 };
-function getTwo({ two }) {
-  return two;
-}
-console.log(getTwo(obj));
-
-// const { a } = { a: 10 }
-// console.log(a) // 10
-
-// function getTwo({ two }) {
-//   return two;
-// } // 2
-
 const getUserNames = users => users.map(({ name }) => name);
 
 console.log(getUserNames(users));
@@ -144,10 +131,7 @@ console.log(getUserWithEmail(users, "elmahead@omatom.com")); // {объект п
 console.log(" ---------6---------");
 
 const getUsersWithAge = (users, min, max) =>
-  users.filter(user => user.age >= min && user.age <= max);
-
-// const getUsersWithAge = (users, min, max) =>
-// users.filter(user => ({age}) age >= min && age <= max);
+  users.filter(({ age }) => age >= min && age <= max);
 
 console.log(getUsersWithAge(users, 20, 30)); // [объект Ross Vazquez, объект Elma Head, объект Carey Barr]
 
@@ -187,23 +171,14 @@ console.log(getNamesSortedByFriendsCount(users));
 //---------10---------
 console.log(" ---------10---------");
 
-const getSortedUniqueSkills = users =>
-  users
-    .reduce((allSkills, user) => {
-      allSkills.push(...user.skills);
-      return allSkills;
-    }, [])
+const getSortedUniqueSkills = users => {
+  const allSortedSkills = users
+    .reduce((allSkills, { skills }) => [...allSkills, ...skills], [])
     .filter((elem, index, array) => array.indexOf(elem) === index)
     .sort((a, b) => a.localeCompare(b, "en"));
 
-// const getSortedUniqueSkills = users => {
-//   const allNeededSkills = users.reduce(
-//     (allSkills, user) => [...allSkills, user],
-//     []
-//   );
-//   console.log(allSkills)
-//   return allNeededSkills;
-// };
+  return allSortedSkills;
+};
 
 console.log(getSortedUniqueSkills(users));
 // [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
