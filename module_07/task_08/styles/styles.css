@@ -1,0 +1,9 @@
+.boxes{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.box{
+  margin: 10px;
+  /* background-color: ; */
+}
