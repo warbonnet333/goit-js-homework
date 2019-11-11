@@ -1,22 +1,46 @@
 "use strict";
 
-let counyerValue = 0;
-const value = document.querySelector("#value");
+const refs = {
+  counter: document.querySelector("#counter"),
+  value: document.querySelector("#value")
+};
 
-const decrement = document.querySelector("button[data-action=decrement]");
-const increment = document.querySelector("button[data-action=increment]");
+const actions = {
+  state: {
+    value: 0
+  },
+  decrement() {
+    this.state.value -= 1;
+  },
+  increment() {
+    this.state.value += 1;
+  }
+};
 
-function incrementValue() {
-  counyerValue = Number(counyerValue);
-  value.textContent = counyerValue += 1;
-  return counyerValue;
-}
+const changeValue = ({ target }) => {
+  actions[target.dataset.action]();
+  refs.value.textContent = actions.state.value;
+};
 
-function decrementValue() {
-  counyerValue = Number(counyerValue);
-  value.textContent = counyerValue -= 1;
-  return counyerValue;
-}
+refs.counter.addEventListener("click", changeValue);
 
-increment.addEventListener("click", incrementValue);
-decrement.addEventListener("click", decrementValue);
+// let counyerValue = 0;
+// const value = document.querySelector("#value");
+
+// const decrement = document.querySelector("button[data-action=decrement]");
+// const increment = document.querySelector("button[data-action=increment]");
+
+// function incrementValue() {
+//   counyerValue = Number(counyerValue);
+//   value.textContent = counyerValue += 1;
+//   return counyerValue;
+// }
+
+// function decrementValue() {
+//   counyerValue = Number(counyerValue);
+//   value.textContent = counyerValue -= 1;
+//   return counyerValue;
+// }
+
+// increment.addEventListener("click", incrementValue);
+// decrement.addEventListener("click", decrementValue);

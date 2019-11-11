@@ -7,6 +7,7 @@ rng.addEventListener("input", changeFontSize);
 
 function changeFontSize() {
   let size = rng.value
-  text.style.fontSize = size + "px"
+  text.style.fontSize = `${size}px`
+  // text.style.fontSize = size + "px"
 }
 

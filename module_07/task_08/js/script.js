@@ -17,20 +17,25 @@ function createBoxes(amount) {
     box.classList.add("box");
     box.style.width = startBoxSize + "px";
     box.style.height = startBoxSize + "px";
-    box.style.backgroundColor = `${getRandomRgb()}`;
+    box.style.backgroundColor = `${randonRGB()}`;
     container.appendChild(box);
     startBoxSize += 10;
   } while (container.children.length < amount);
 }
 
 function destroyBoxes() {
-  [...container.children].forEach(box => box.remove());
+  container.innerHTML = "";
+  // [...container.children].forEach(box => box.remove());
 }
 
-function getRandomRgb() {
-  let num = Math.round(0xffffff * Math.random());
-  let r = num >> 16;
-  let g = (num >> 8) & 255;
-  let b = num & 255;
-  return `rgb(${r},${g},${b})`;
-}
+const randomColor = () => Math.floor(Math.random() * 256);
+const randonRGB = () =>
+  `rgb(${randomColor()},${randomColor()},${randomColor()})`;
+
+// function getRandomRgb() {
+//   let num = Math.round(0xffffff * Math.random());
+//   let r = num >> 16;
+//   let g = (num >> 8) & 255;
+//   let b = num & 255;
+//   return `rgb(${r},${g},${b})`;
+// }

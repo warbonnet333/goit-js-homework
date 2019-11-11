@@ -11,12 +11,14 @@ const ingredients = [
 
 function createList(array) {
   const ingredientsList = document.querySelector("#ingredients");
+  let neededArr = [];
   for (let arr of array) {
     const listItem = document.createElement("li");
     listItem.textContent = arr;
-    ingredientsList.appendChild(listItem);
+    neededArr.push(listItem);
   }
-  return ingredientsList;
+
+  return ingredientsList.append(...neededArr);
 }
 
 console.log(createList(ingredients));
