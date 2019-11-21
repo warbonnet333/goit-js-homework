@@ -64,15 +64,18 @@ const images = [
   }
 ];
 
-const gallery = document.querySelector(".js-gallery");
-const modalWindow = document.querySelector(".js-lightbox");
-const currentImage = modalWindow.querySelector(".lightbox__image");
-const closeBtn = document.querySelector("button[data-action=close-lightbox]");
-const modalDrop = document.querySelector(".js-content");
+const refs = {
+  gallery: document.querySelector(".js-gallery"),
+  modalWindow: document.querySelector(".js-lightbox"),
+  closeBtn: document.querySelector("button[data-action=close-lightbox]"),
+  modalDrop: document.querySelector(".js-content")
+};
 
-gallery.addEventListener("click", openItem);
-closeBtn.addEventListener("click", closeItem);
-modalDrop.addEventListener("click", handleOverlayClick);
+const currentImage = refs.modalWindow.querySelector(".lightbox__image");
+
+refs.gallery.addEventListener("click", openItem);
+refs.closeBtn.addEventListener("click", closeItem);
+refs.modalDrop.addEventListener("click", handleOverlayClick);
 window.addEventListener("keydown", keyPress);
 
 const html = images
@@ -99,7 +102,7 @@ alt="${el.description}"
   )
   .join(" ");
 
-gallery.insertAdjacentHTML("beforeend", html);
+refs.gallery.insertAdjacentHTML("beforeend", html);
 
 let currentImageIndex;
 
@@ -108,7 +111,7 @@ function openItem(event) {
   if (event.target.nodeName !== "IMG") {
     return;
   }
-  modalWindow.classList.add("is-open");
+  refs.modalWindow.classList.add("is-open");
   const currentImageSrc = event.target.dataset.source;
   currentImageIndex = +event.target.dataset.index;
   currentImage.setAttribute("src", currentImageSrc);
@@ -116,7 +119,7 @@ function openItem(event) {
 }
 
 function closeItem() {
-  modalWindow.classList.remove("is-open");
+  refs.modalWindow.classList.remove("is-open");
   currentImage.removeAttribute("src");
 }
 
@@ -130,7 +133,7 @@ function handleOverlayClick(event) {
 function keyPress(event) {
   if (event.code === "Escape") {
     closeItem();
-  } else if (modalWindow.classList.contains("is-open")) {
+  } else if (refs.modalWindow.classList.contains("is-open")) {
     let nextImg;
     let index = +currentImage.dataset.index;
     if (event.key === "ArrowRight") {
