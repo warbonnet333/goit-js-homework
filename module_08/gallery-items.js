@@ -75,35 +75,33 @@ closeBtn.addEventListener("click", closeItem);
 modalDrop.addEventListener("click", handleOverlayClick);
 window.addEventListener("keydown", keyPress);
 
-function createMarkup(item) {
-  return `
-  <li class="gallery__item">
-  <a
+const html = images
+  .map(
+    (el, ind) => `
+<li class="gallery__item">
+<a
 class="gallery__link"
-href=${item.preview}
+href=${el.preview}
 >
 <img
 class="gallery__image"
-src=${item.preview}
-data-source=${item.original}
-alt="${item.description}"
+src=${el.preview}
+data-source=${el.original}
+data-index=${ind}
+alt="${el.description}"
 />
 
 <span class="gallery__icon">
 <i class="material-icons">zoom_out_map</i>
 </span>
 </a>
-</li> `;
-}
+</li> `
+  )
+  .join(" ");
 
-function createListItem(array) {
-  array.forEach(arr => {
-    const markup = createMarkup(arr);
-    gallery.insertAdjacentHTML("beforeend", markup);
-  });
-}
+gallery.insertAdjacentHTML("beforeend", html);
 
-createListItem(images);
+let currentImageIndex;
 
 function openItem(event) {
   event.preventDefault();
@@ -112,7 +110,9 @@ function openItem(event) {
   }
   modalWindow.classList.add("is-open");
   const currentImageSrc = event.target.dataset.source;
+  currentImageIndex = +event.target.dataset.index;
   currentImage.setAttribute("src", currentImageSrc);
+  currentImage.setAttribute("data-index", currentImageIndex);
 }
 
 function closeItem() {
@@ -130,19 +130,29 @@ function handleOverlayClick(event) {
 function keyPress(event) {
   if (event.code === "Escape") {
     closeItem();
+  } else if (modalWindow.classList.contains("is-open")) {
+    let nextImg;
+    let index = +currentImage.dataset.index;
+    if (event.key === "ArrowRight") {
+      if (index === images.length - 1) {
+        return;
+      }
+      index += 1;
+      nextImg = images[index].original;
+      currentImage.removeAttribute("src");
+      currentImage.setAttribute("src", nextImg);
+      currentImage.dataset.index = index;
+      return;
+    } else if (event.key === "ArrowLeft") {
+      if (index === 0) {
+        return;
+      }
+      index -= 1;
+      nextImg = images[index].original;
+      currentImage.removeAttribute("src");
+      currentImage.setAttribute("src", nextImg);
+      currentImage.dataset.index = index;
+      return;
+    }
   }
-  //  else if (modalWindow.classList.contains("is-open")) {
-  //   if (event.code === "ArrowRight") {
-  //     console.log("Rigth");
-  //     nextImage();
-  //   } else if (event.code === "ArrowLeft") {
-  //     console.log("Left");
-  //   }
-  // }
 }
-
-// function nextImage() {
-//   const galleryItems = currentImage.closest(".js-lightbox")
-//     .previousElementSibling.children;
-//   console.log(...galleryItems);
-// }
